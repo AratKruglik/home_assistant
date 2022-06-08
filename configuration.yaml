@@ -1,0 +1,103 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: My Sweet Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 50.514300
+  longitude: 30.418290
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 50
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Kiev
+  # Customization file
+  # customize: !include_dir_merge_named includes/customize
+  packages: !include_dir_merge_named packages
+# default_config:
+  whitelist_external_dirs :
+   - /config
+config:
+#Сканирование доступных устройств в сети
+ssdp:
+# Включение официального интерфейса
+frontend:
+  themes: !include_dir_merge_named themes
+# Включение карты
+# map:
+# Включение поддержки приложения
+mobile_app:
+# Включение кнопок ввода
+input_button:
+# Отслеживание солнца
+sun:
+# API для предоставления информации о системе и ее компонентах
+system_health:
+# Сенсор для отображения последней версии НА
+updater:
+# Stream from camera
+# stream:
+history:
+
+# Медиа контент
+media_source:
+
+# lovelace:
+#   mode: yaml
+#   resources:
+#    - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
+#      type: module
+#    - url: /hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js
+#      type: js 
+#    - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
+#      type: module
+#    - url: /hacsfiles/lovelace-card-mod/card-mod.js
+#      type: module
+#    - url: /hacsfiles/stack-in-card/stack-in-card.js
+#      type: module
+#    - url: /hacsfiles/battery-state-card/battery-state-card.js
+#      type: module
+#    - url: /hacsfiles/logbook-card/logbook-card.js
+#      type: module
+#    - url: /hacsfiles/entity-attributes-card/entity-attributes-card.js
+#      type: module
+#    - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
+#      type: module
+#    - url: /hacsfiles/lovelace-tempometer-gauge-card/tempometer-gauge-card.js
+#      type: module
+#    - url: /hacsfiles/flipdown-timer-card/flipdown-timer-card.js
+#      type: module
+#    - url:  /hacsfiles/vacuum-card/vacuum-card.js
+#      type: module 
+
+logbook:
+
+remote:
+  # - platform: xiaomi_miio
+  #   name: "kn ir base"
+  #   host: 192.168.0.135
+  #   token: db472a45b4f1913439abaab3f7ff6356
+  #   slot: 3
+  #   timeout: 30
+  #   hidden: false
+
+# Text to speech
+tts:
+  - platform: google_translate
+  
+  - platform: reversotts
+    language: 'Alyona-Russian'
+    pitch: "100"
+    bitrate: "128k"
+  
+recorder: !include recorder.yaml
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+telegram_bot:
+  - platform: polling
+    api_key: !secret api_key_bot
+    allowed_chat_ids:
+      - !secret chat_id_oleksii
+      - !secret chat_id_katia
